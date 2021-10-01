@@ -33,4 +33,15 @@ public class UserService {
 		return lisUser.stream().map(dto -> new UserDTO(dto)).collect(Collectors.toList());
 	}
 
+	@Transactional
+	public UserDTO create(UserDTO dto) {
+		User user = new User();
+		user.setName(dto.getName());
+		user.setEmail(dto.getEmail());
+		user = repository.save(user);
+		return new UserDTO(user);
+	}
+
+	
+
 }
