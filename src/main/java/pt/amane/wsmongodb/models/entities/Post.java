@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import pt.amane.wsmongodb.models.embedded.Author;
 import pt.amane.wsmongodb.models.embedded.Comment;
 
-@Document(collation = "posts")
+@Document(collection = "posts")
 public class Post {
 
 	@Id
