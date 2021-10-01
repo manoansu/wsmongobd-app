@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import pt.amane.wsmongodb.models.dtos.PostDTO;
 import pt.amane.wsmongodb.models.dtos.UserDTO;
 import pt.amane.wsmongodb.services.UserService;
 
@@ -49,6 +50,12 @@ public class UserResource {
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<UserDTO> update(@PathVariable String id, @RequestBody UserDTO dto){
 		dto = service.update(id, dto);
+		return ResponseEntity.ok().body(dto);
+	}
+	
+	@GetMapping(value = "/{id}/posts")
+	public ResponseEntity<List<PostDTO>> getUsersPost(@PathVariable String id){
+		List<PostDTO> dto = service.getUsersPost(id);
 		return ResponseEntity.ok().body(dto);
 	}
 	

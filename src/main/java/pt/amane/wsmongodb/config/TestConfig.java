@@ -73,5 +73,7 @@ public class TestConfig {
 		carlos.getPosts().addAll(Arrays.asList(post4));
 		katia.getPosts().addAll(Arrays.asList(post5));
 		edson.getPosts().addAll(Arrays.asList(post6));
+		
+		userRepository.saveAll(Arrays.asList(maria, julia, katia, carlos, edson));
 	}
 }

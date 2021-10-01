@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import pt.amane.wsmongodb.models.dtos.PostDTO;
 import pt.amane.wsmongodb.models.dtos.UserDTO;
 import pt.amane.wsmongodb.models.entities.User;
 import pt.amane.wsmongodb.repositories.UserRepository;
@@ -60,6 +61,11 @@ public class UserService {
 		Optional<User> userId = repository.findById(id);
 		return userId.orElseThrow(() -> new ObjectNotFoundException("Id not found! Id: " + id + User.class.getName()));
 
+	}
+
+	public List<PostDTO> getUsersPost(String id) {
+		User user = getEntityById(id);
+		return user.getPosts().stream().map(p -> new PostDTO(p)).collect(Collectors.toList());
 	}
 
 }

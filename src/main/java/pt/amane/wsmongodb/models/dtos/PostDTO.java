@@ -2,7 +2,10 @@ package pt.amane.wsmongodb.models.dtos;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
+import pt.amane.wsmongodb.models.embedded.Comment;
 import pt.amane.wsmongodb.models.entities.Post;
 
 public class PostDTO implements Serializable {
@@ -13,6 +16,7 @@ public class PostDTO implements Serializable {
 	private Instant moment;
 	private String title;
 	private String body;
+	private List<Comment> comments = new ArrayList<>();
 
 	public PostDTO() {
 	}
@@ -29,6 +33,7 @@ public class PostDTO implements Serializable {
 		this.moment = post.getMoment();
 		this.title = post.getTitle();
 		this.body = post.getBody();
+		this.comments.addAll(post.getComments());
 	}
 
 	public String getId() {
