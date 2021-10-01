@@ -1,5 +1,7 @@
 package pt.amane.wsmongodb.services;
 
+import java.time.Instant;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,6 +35,23 @@ public class PostService {
 		List<Post> lisUser = repository.findByTitleContainingIgnoreCase(text);
 		return lisUser.stream().map(dto -> new PostDTO(dto)).collect(Collectors.toList());
 	}
+	
+	
+	public List<PostDTO> fullSearch(String text, String start, String end) {
+		Instant startMoment = convertMoment(start, Instant.ofEpochMilli(0L));
+		Instant endMoment = convertMoment(start, Instant.now());
+		List<Post> lisUser = repository.fullSearch(text, startMoment, endMoment);
+		return lisUser.stream().map(dto -> new PostDTO(dto)).collect(Collectors.toList());
+	}
+
+	private Instant convertMoment(String OriginStart, Instant alternative) {
+		try {
+			return Instant.parse(OriginStart);
+		} catch (DateTimeParseException e) {
+			return alternative;
+		}
+	}
+
 
 
 }
