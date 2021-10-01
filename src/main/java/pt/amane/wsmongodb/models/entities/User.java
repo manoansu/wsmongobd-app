@@ -15,9 +15,9 @@ public class User {
 	private String id;
 	private String name;
 	private String email;
-	
+
 	// lazy = true indicated db that is not load it every time..
-	@DBRef(lazy = true) 
+	@DBRef(lazy = true)
 	private List<Post> posts = new ArrayList<>();
 
 	public User() {
@@ -40,6 +40,10 @@ public class User {
 
 	public String getEmail() {
 		return email;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
 	}
 
 	public void setId(String id) {
