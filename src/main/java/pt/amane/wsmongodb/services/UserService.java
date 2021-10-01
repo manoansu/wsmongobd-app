@@ -42,6 +42,22 @@ public class UserService {
 		return new UserDTO(user);
 	}
 
+	@Transactional
+	public UserDTO update(String id, UserDTO dto) {
+		User user = getEntityById(id);
+		user.setName(dto.getName());
+		user.setEmail(dto.getEmail());
+		user = repository.save(user);
+		return new UserDTO(user);
+	}
+
+	private User getEntityById(String id) {
+		Optional<User> userId = repository.findById(id);
+		return userId
+				.orElseThrow(() -> new ObjectNotFoundException("Id not found! Id: " + id + User.class.getName()));
+		
+	}
+
 	
 
 }
