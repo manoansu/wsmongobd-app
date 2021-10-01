@@ -51,13 +51,15 @@ public class UserService {
 		return new UserDTO(user);
 	}
 
-	private User getEntityById(String id) {
-		Optional<User> userId = repository.findById(id);
-		return userId
-				.orElseThrow(() -> new ObjectNotFoundException("Id not found! Id: " + id + User.class.getName()));
-		
+	public void delete(String id) {
+		User user = getEntityById(id);
+		repository.deleteById(user.getId());
 	}
 
-	
+	private User getEntityById(String id) {
+		Optional<User> userId = repository.findById(id);
+		return userId.orElseThrow(() -> new ObjectNotFoundException("Id not found! Id: " + id + User.class.getName()));
+
+	}
 
 }
